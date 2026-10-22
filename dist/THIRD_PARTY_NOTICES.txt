@@ -1,0 +1,6 @@
+MediaPipe Tasks Vision 0.10.32, Copyright Google LLC, Apache License 2.0.
+Source: https://www.npmjs.com/package/@mediapipe/tasks-vision/v/0.10.32
+License: https://www.apache.org/licenses/LICENSE-2.0
+Hand Landmarker model: https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task
+Asset URLs, versions and SHA-256 hashes are recorded in vendor/provenance.json.
+Flower artwork was generated for this project.

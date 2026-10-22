@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f0e9e5"><meta name="description" content="指尖捏起一朵花，松手让花瓣乘风。四时，一场与你的双手相遇的春日花境。"><title>四时 · 指尖花境</title><link rel="stylesheet" href="./style.css"></head>
+<body>
+<canvas id="garden" tabindex="0" aria-label="密铺的春日花境。鼠标模式下，空格键让全部花朵绽放，R 键重置。"></canvas>
+<header class="topbar">
+  <a class="brand" href="./" aria-label="四时首页"><span>四时</span><small>SEASONS</small></a>
+  <nav class="seasons" aria-label="四季"><button class="current" aria-current="page">春</button><button disabled title="夏日篇章待续">夏</button><button disabled title="秋日篇章待续">秋</button><button disabled title="冬日篇章待续">冬</button></nav>
+  <div class="top-actions"><button id="helpToggle" class="icon-button" aria-label="手势说明" title="手势说明">?</button><button id="settingsToggle" class="icon-button" aria-label="定位设置" title="定位设置"><svg viewBox="0 0 24 24"><path d="M3 7h18M3 17h18M8 4v6M16 14v6"/></svg></button></div>
+</header>
+<section class="intro glass" id="intro" aria-labelledby="welcomeTitle">
+  <p class="eyebrow">A LITTLE SPRING, IN YOUR HANDS</p><h1 id="welcomeTitle">让春天，<em>停在指尖。</em></h1>
+  <p class="intro-copy">指一指，让花开。轻轻捏起，再把花瓣还给风。</p>
+  <button id="startCamera" class="primary"><svg viewBox="0 0 24 24"><path d="M8 7h3l2-2h5l1 3h2v11H3V8h5Z"/><circle cx="13" cy="13" r="3"/></svg><span>开启手势体验</span></button>
+  <button id="startMouse" class="text-button">先用鼠标试试 <span>↗</span></button>
+  <p class="privacy">摄像头仅在本机识别，不录制、不上传画面。</p>
+</section>
+<aside id="help" class="panel glass" hidden aria-label="手势说明">
+  <div class="panel-title"><span>与花相遇的三种方式</span><button class="close" data-close="help" aria-label="关闭手势说明">×</button></div>
+  <div class="gesture-row"><b>01</b><div><strong>指尖轻捏</strong><p>捏起光点所在的花，移动手指带着它走；松开，花瓣就乘风散去。</p></div></div>
+  <div class="gesture-row"><b>02</b><div><strong>伸出食指</strong><p>指到哪朵，哪朵开花。来回轻扫，沿途的花会依次绽放。</p></div></div>
+  <div class="gesture-row"><b>03</b><div><strong>五指张开</strong><p>唤醒整片花境。张掌左右轻扫，让所有花朵跟着风摇摆。</p></div></div>
+  <p class="fine">让整只手进入镜头，距摄像头约一臂。光点是你当前的落点。</p>
+  <p class="mouse-help">鼠标：移动开花 · 按住拿起 · 松开散瓣<br>按住空格并移动：张掌与迎风 · R：重新开始</p>
+</aside>
+<aside id="settings" class="panel glass" hidden aria-label="定位设置">
+  <div class="panel-title"><span>让指尖更贴合画面</span><button class="close" data-close="settings" aria-label="关闭定位设置">×</button></div>
+  <label class="switch-row"><span>镜像移动<small>像照镜子一样，向右动就是向右</small></span><input id="mirror" type="checkbox" checked></label>
+  <label class="switch-row"><span>显示摄像头小窗</span><input id="previewToggle" type="checkbox" checked></label>
+  <button id="calibrate" class="secondary">校准手指活动范围</button><p class="fine">若花朵落点偏移或边缘难以触达，可重新校准。先将食指移到舒适范围的左上角，再移到右下角。</p>
+  <button id="clearCalibration" class="text-button">恢复默认定位</button>
+</aside>
+<div id="calibration" class="calibration glass" hidden><strong id="calibrationTitle">把食指移到舒适范围的左上角</strong><p id="calibrationHint">看到光点后，保持食指伸直。准备好后点击记录。</p><button id="recordCalibration" class="primary">记录左上角</button><button id="cancelCalibration" class="text-button">取消校准</button></div>
+<div id="cameraPreview" class="camera-preview glass" hidden><video id="video" playsinline muted></video><canvas id="handOverlay" aria-hidden="true"></canvas><div><i id="trackingDot"></i><span id="trackingLabel">寻找你的手</span></div><button id="hidePreview" aria-label="隐藏摄像头预览">×</button></div>
+<div id="loading" class="loading" role="status"><span></span>花境正在醒来</div>
+<div id="error" class="error glass" role="alert" hidden></div>
+<footer class="bottom-bar"><div class="chapter"><span>春 <i>/</i> SPRING</span><small>01</small></div>
+  <div class="hint glass"><span id="modeDot"></span><span id="hintText" aria-live="polite">指尖轻合，花朵缓缓绽放</span></div>
+  <div class="bottom-actions"><button id="cameraToggle" class="icon-button" aria-label="开启摄像头" title="开启摄像头"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="12" height="12" rx="3"/><path d="m15 10 6-3v10l-6-3"/></svg></button><button id="reset" class="icon-button" aria-label="重新开始" title="重新开始"><svg viewBox="0 0 24 24"><path d="M5 8a8 8 0 1 1-1 6M4 3v6h6"/></svg></button><button id="fullscreen" class="icon-button" aria-label="切换全屏" title="切换全屏"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button></div>
+</footer>
+<script type="module" src="./app.mjs"></script>
+</body></html>

@@ -1,0 +1,13 @@
+{
+  "name": "sishi-gesture-interaction",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {"node": ">=22"},
+  "scripts": {
+    "start": "node serve.mjs",
+    "build": "node scripts/build.mjs",
+    "test": "node tests/core.test.mjs",
+    "check": "node --check dist/app.mjs && node --check dist/core.mjs && node --check dist/render.mjs && node tests/core.test.mjs"
+  }
+}

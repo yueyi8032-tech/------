@@ -1,0 +1,6 @@
+{
+  "files.encoding": "utf8",
+  "files.exclude": {"**/node_modules": true},
+  "search.exclude": {"dist/vendor/**": true},
+  "git.enableSmartCommit": false
+}
